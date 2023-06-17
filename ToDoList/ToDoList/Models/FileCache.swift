@@ -1,7 +1,7 @@
 import Foundation
 
 class FileCache {
-    var toDoItems:[String:TodoItem]
+    private(set) var toDoItems:[String:TodoItem]
     
     init() {
         self.toDoItems = [:]
