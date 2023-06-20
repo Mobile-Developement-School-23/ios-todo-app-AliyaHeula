@@ -16,13 +16,7 @@ struct TodoItem {
     let changedOn: Date?
     
     init(id: String?, text: String, importance: Importance, deadline: Date?, isDone: Bool, createdOn: Date, changedOn: Date?) {
-        self.id = {
-            if let id = id {
-                return id
-            } else {
-                return UUID().uuidString
-            }
-        }()
+        self.id = id ?? UUID().uuidString
         self.text = text
         self.importance = importance
         self.deadline = deadline
@@ -49,32 +43,22 @@ extension TodoItem {
         }
         
         //Check importance, deadline and changedOn parameters for nil:
-        var importance: Importance
-        if importanceCheck is NSNull {
-            importance = .medium
-        } else if let str = importanceCheck as? String,
-                  let tmp = Importance(rawValue: str) {
+        var importance = Importance.medium
+        if let str = importanceCheck as? String,
+           let tmp = Importance(rawValue: str) {
             importance = tmp
-        } else {
-            return nil
         }
         
-        var deadline: Date?
-        if deadlineCheck is NSNull {
-            deadline = nil
-        } else if let tmp = deadlineCheck as? TimeInterval {
+        var deadline: Date? = nil
+        if let tmp = deadlineCheck as? TimeInterval {
             deadline = Date(timeIntervalSince1970: tmp)
-        } else {
-            return nil
         }
-        var changedOn: Date?
-        if changedOnCheck is NSNull {
-            changedOn = nil
-        } else if let tmp = changedOnCheck as? TimeInterval {
-            deadline = Date(timeIntervalSince1970: tmp)
-        } else {
-            return nil
+
+        var changedOn: Date? = nil
+        if let tmp = changedOnCheck as? TimeInterval {
+            changedOn = Date(timeIntervalSince1970: tmp)
         }
+        
         return TodoItem(id: id,
                         text: text,
                         importance: importance,
