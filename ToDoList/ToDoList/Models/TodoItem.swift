@@ -35,27 +35,28 @@ extension TodoItem {
         guard let id = dictionary["id"] as? String,
               let text = dictionary["text"] as? String,
               let isDone = dictionary["isDone"] as? Bool,
-              let createdOn = dictionary["createdOn"] as? TimeInterval,
-              let importanceCheck = dictionary["importance"],
-              let deadlineCheck = dictionary["deadline"],
-              let changedOnCheck = dictionary["changedOn"] else {
+              let createdOn = dictionary["createdOn"] as? TimeInterval
+//              let importanceCheck = dictionary["importance"],
+//              let deadlineCheck = dictionary["deadline"],
+//              let changedOnCheck = dictionary["changedOn"]
+        else {
             return nil
         }
         
         //Check importance, deadline and changedOn parameters for nil:
         var importance = Importance.medium
-        if let str = importanceCheck as? String,
+        if let str = dictionary["importance"] as? String,
            let tmp = Importance(rawValue: str) {
             importance = tmp
         }
         
         var deadline: Date? = nil
-        if let tmp = deadlineCheck as? TimeInterval {
+        if let tmp = dictionary["deadline"] as? TimeInterval {
             deadline = Date(timeIntervalSince1970: tmp)
         }
 
         var changedOn: Date? = nil
-        if let tmp = changedOnCheck as? TimeInterval {
+        if let tmp = dictionary["changedOn"] as? TimeInterval {
             changedOn = Date(timeIntervalSince1970: tmp)
         }
         
@@ -69,14 +70,20 @@ extension TodoItem {
     }
     
     var json: Any {
-        let dictionary = ["id": self.id,
-                          "text": self.text,
-                          "importance": self.importance == .medium ? NSNull() : self.importance.rawValue,
-                          "deadline":  self.deadline == nil ? NSNull() : self.deadline!.timeIntervalSince1970,
-                          "isDone": self.isDone,
-                          "createdOn": self.createdOn.timeIntervalSince1970,
-                          "changedOn": self.changedOn == nil ? NSNull() : self.changedOn!.timeIntervalSince1970
-        ] as [String : Any]
+        var dictionary:[String: Any] = [:]
+        dictionary["id"] = self.id
+        dictionary["text"] = self.text
+        if self.importance != .medium {
+            dictionary["importance"] = self.importance.rawValue
+        }
+        if let deadline = self.deadline {
+            dictionary["deadline"] = Int(deadline.timeIntervalSince1970)
+        }
+        dictionary["isDone"] = self.isDone
+        dictionary["createdOn"] = Int(self.createdOn.timeIntervalSince1970)
+        if let changedOn = self.changedOn {
+            dictionary["changedOn"] = Int(changedOn.timeIntervalSince1970)
+        }
         return dictionary
     }
 }

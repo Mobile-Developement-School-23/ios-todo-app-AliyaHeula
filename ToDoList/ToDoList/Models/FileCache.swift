@@ -35,14 +35,7 @@ final class FileCache {
         defer {
             outputStream.close()
         }
-//        var jsonArray = [[String: Any]] ()
-        var jsonArray = toDoItems.map { $0.value.json }
-//        for (_,item) in toDoItems {
-//            jsonArray.append(item.json as! [String : Any])
-//        }
-//        var jsonDictionary = [String: [[String: Any]]]()
-//        jsonDictionary.updateValue(jsonArray, forKey: "list")
-        
+        let jsonArray = toDoItems.map { $0.value.json}
         guard JSONSerialization.isValidJSONObject(jsonArray) else {
             print("JSON object creation error. Data is not saved.")
             return false
