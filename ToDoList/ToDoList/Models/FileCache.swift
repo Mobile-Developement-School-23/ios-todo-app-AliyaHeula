@@ -22,7 +22,7 @@ final class FileCache {
             return false
         }
         let url = directory.appendingPathComponent(fileName).appendingPathExtension(fileExtension)
-        
+
         guard FileManager.default.createFile(atPath: url.path, contents: nil) else {
             print("Backup file creation error. Data is not saved.")
             return false
@@ -81,5 +81,3 @@ final class FileCache {
         return true
     }
 }
-
-

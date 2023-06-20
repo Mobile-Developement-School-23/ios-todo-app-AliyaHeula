@@ -36,9 +36,6 @@ extension TodoItem {
               let text = dictionary["text"] as? String,
               let isDone = dictionary["isDone"] as? Bool,
               let createdOn = dictionary["createdOn"] as? TimeInterval
-//              let importanceCheck = dictionary["importance"],
-//              let deadlineCheck = dictionary["deadline"],
-//              let changedOnCheck = dictionary["changedOn"]
         else {
             return nil
         }
