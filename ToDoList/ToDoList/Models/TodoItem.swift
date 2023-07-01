@@ -1,10 +1,6 @@
 import Foundation
+import spm
 
-enum Importance: String {
-    case low
-    case medium
-    case high
-}
 
 struct TodoItem {
     let id: String

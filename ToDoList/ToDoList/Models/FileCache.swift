@@ -1,21 +1,23 @@
 import Foundation
+import UIKit
+import spm
 
-final class FileCache {
+class FileCache {
     private(set) var toDoItems:[String:TodoItem] = [:]
-    
+
     func addNewItem(id: String?, text: String, importance: Importance, deadline: Date?, isDone: Bool) {
-        let newItem = TodoItem(id: id, text: text, importance: importance, deadline: deadline, isDone: isDone, createdOn: .now, changedOn: nil)
+        let newItem = TodoItem(id: id, text: text, importance: importance, deadline: deadline, isDone: isDone, createdOn: Date(), changedOn: nil)
         toDoItems.updateValue(newItem, forKey: newItem.id)
     }
-    
+
     func addNewItem(newItem: TodoItem) {
         toDoItems.updateValue(newItem, forKey: newItem.id)
     }
-    
+
     func deleteItemBy(id: String) {
         toDoItems.removeValue(forKey: id)
     }
-    
+
     func saveAllToJSON(fileName: String, fileExtension: String) -> Bool {
         guard let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
             print("File saving directory is not found")
@@ -27,7 +29,7 @@ final class FileCache {
             print("Backup file creation error. Data is not saved.")
             return false
         }
-        
+
         guard let outputStream = OutputStream(url: url, append: true) else {
             return false
         }
@@ -43,8 +45,8 @@ final class FileCache {
         JSONSerialization.writeJSONObject(jsonArray, to: outputStream, options: [.prettyPrinted], error: NSErrorPointer(nil))
         return true
     }
-    
-    
+
+
     func saveAllFromJSON (fileName: String, fileExtension: String) -> Bool {
         guard let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
             print("File saving directory is not found")
