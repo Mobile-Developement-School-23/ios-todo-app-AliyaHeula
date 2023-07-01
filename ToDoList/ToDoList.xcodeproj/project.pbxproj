@@ -14,9 +14,16 @@
 		4D86FE8E2A46738500BCA7AC /* DeleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D86FE8D2A46738500BCA7AC /* DeleteButton.swift */; };
 		4D86FE902A46A47B00BCA7AC /* testFile.json in Resources */ = {isa = PBXBuildFile; fileRef = 4D86FE8F2A46A47B00BCA7AC /* testFile.json */; };
 		4D86FE932A46A58F00BCA7AC /* TasksLaunching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D86FE922A46A58F00BCA7AC /* TasksLaunching.swift */; };
+		4D86FE972A4A41D100BCA7AC /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D86FE962A4A41D000BCA7AC /* MainScreenViewController.swift */; };
+		4D86FE992A4A441800BCA7AC /* ToDoTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D86FE982A4A441800BCA7AC /* ToDoTableView.swift */; };
+		4D86FE9D2A4B191200BCA7AC /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D86FE9C2A4B191200BCA7AC /* TableViewCell.swift */; };
+		4D8B08BF2A4B5877009332D5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8B08BE2A4B5877009332D5 /* Constants.swift */; };
+		4D8B08C12A4B6294009332D5 /* HiddenTasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8B08C02A4B6294009332D5 /* HiddenTasksView.swift */; };
+		4D8B08C42A4D9165009332D5 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8B08C32A4D9165009332D5 /* Images.swift */; };
+		4D8B08C62A4DF8D4009332D5 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8B08C52A4DF8D4009332D5 /* Colors.swift */; };
+		4D8B08C82A4FA61B009332D5 /* ToDoErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8B08C72A4FA61B009332D5 /* ToDoErrors.swift */; };
 		4DD4D7432A35EECE001315A8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD4D7422A35EECE001315A8 /* AppDelegate.swift */; };
 		4DD4D7452A35EECE001315A8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD4D7442A35EECE001315A8 /* SceneDelegate.swift */; };
-		4DD4D7472A35EECE001315A8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD4D7462A35EECE001315A8 /* ViewController.swift */; };
 		4DD4D74C2A35EED0001315A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DD4D74B2A35EED0001315A8 /* Assets.xcassets */; };
 		4DD4D74F2A35EED0001315A8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DD4D74D2A35EED0001315A8 /* LaunchScreen.storyboard */; };
 		4DD4D7582A35EF1C001315A8 /* TodoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD4D7572A35EF1C001315A8 /* TodoItem.swift */; };
@@ -31,10 +38,17 @@
 		4D86FE8D2A46738500BCA7AC /* DeleteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteButton.swift; sourceTree = "<group>"; };
 		4D86FE8F2A46A47B00BCA7AC /* testFile.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = testFile.json; sourceTree = "<group>"; };
 		4D86FE922A46A58F00BCA7AC /* TasksLaunching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksLaunching.swift; sourceTree = "<group>"; };
+		4D86FE962A4A41D000BCA7AC /* MainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
+		4D86FE982A4A441800BCA7AC /* ToDoTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoTableView.swift; sourceTree = "<group>"; };
+		4D86FE9C2A4B191200BCA7AC /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		4D8B08BE2A4B5877009332D5 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		4D8B08C02A4B6294009332D5 /* HiddenTasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenTasksView.swift; sourceTree = "<group>"; };
+		4D8B08C32A4D9165009332D5 /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
+		4D8B08C52A4DF8D4009332D5 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		4D8B08C72A4FA61B009332D5 /* ToDoErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoErrors.swift; sourceTree = "<group>"; };
 		4DD4D73F2A35EECE001315A8 /* ToDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DD4D7422A35EECE001315A8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4DD4D7442A35EECE001315A8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		4DD4D7462A35EECE001315A8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		4DD4D74B2A35EED0001315A8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4DD4D74E2A35EED0001315A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4DD4D7502A35EED0001315A8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -56,11 +70,8 @@
 		4D68F12A2A4337BE003BEEC1 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				4D68F12B2A43385C003BEEC1 /* TaskViewController.swift */,
-				4D300DE22A45AB87003814D4 /* TaskStackView.swift */,
-				4D300DE02A45A51C003814D4 /* TaskTextView.swift */,
-				4DD4D7462A35EECE001315A8 /* ViewController.swift */,
-				4D86FE8D2A46738500BCA7AC /* DeleteButton.swift */,
+				4D86FE9B2A4A443A00BCA7AC /* Task */,
+				4D86FE9A2A4A442800BCA7AC /* Home */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -71,6 +82,39 @@
 				4D86FE922A46A58F00BCA7AC /* TasksLaunching.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		4D86FE9A2A4A442800BCA7AC /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				4D86FE962A4A41D000BCA7AC /* MainScreenViewController.swift */,
+				4D86FE982A4A441800BCA7AC /* ToDoTableView.swift */,
+				4D86FE9C2A4B191200BCA7AC /* TableViewCell.swift */,
+				4D8B08C02A4B6294009332D5 /* HiddenTasksView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		4D86FE9B2A4A443A00BCA7AC /* Task */ = {
+			isa = PBXGroup;
+			children = (
+				4D68F12B2A43385C003BEEC1 /* TaskViewController.swift */,
+				4D300DE22A45AB87003814D4 /* TaskStackView.swift */,
+				4D300DE02A45A51C003814D4 /* TaskTextView.swift */,
+				4D86FE8D2A46738500BCA7AC /* DeleteButton.swift */,
+			);
+			path = Task;
+			sourceTree = "<group>";
+		};
+		4D8B08C22A4D9138009332D5 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				4D8B08BE2A4B5877009332D5 /* Constants.swift */,
+				4D8B08C32A4D9165009332D5 /* Images.swift */,
+				4D8B08C52A4DF8D4009332D5 /* Colors.swift */,
+				4D8B08C72A4FA61B009332D5 /* ToDoErrors.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		4DD4D7362A35EECE001315A8 = {
@@ -92,11 +136,11 @@
 		4DD4D7412A35EECE001315A8 /* ToDoList */ = {
 			isa = PBXGroup;
 			children = (
+				4DD4D7422A35EECE001315A8 /* AppDelegate.swift */,
+				4DD4D7442A35EECE001315A8 /* SceneDelegate.swift */,
 				4D86FE912A46A4ED00BCA7AC /* Controller */,
 				4D68F12A2A4337BE003BEEC1 /* View */,
 				4DD4D7562A35EF0E001315A8 /* Models */,
-				4DD4D7422A35EECE001315A8 /* AppDelegate.swift */,
-				4DD4D7442A35EECE001315A8 /* SceneDelegate.swift */,
 				4DD4D74B2A35EED0001315A8 /* Assets.xcassets */,
 				4DD4D74D2A35EED0001315A8 /* LaunchScreen.storyboard */,
 				4DD4D7502A35EED0001315A8 /* Info.plist */,
@@ -111,6 +155,7 @@
 				4DD4D75B2A3786AF001315A8 /* FileCache.swift */,
 				4DD4D7572A35EF1C001315A8 /* TodoItem.swift */,
 				4D2D9BA22A3D5D06003A2752 /* testModels.swift */,
+				4D8B08C22A4D9138009332D5 /* Utils */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -187,14 +232,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D86FE932A46A58F00BCA7AC /* TasksLaunching.swift in Sources */,
+				4D8B08C62A4DF8D4009332D5 /* Colors.swift in Sources */,
 				4D300DE12A45A51C003814D4 /* TaskTextView.swift in Sources */,
-				4DD4D7472A35EECE001315A8 /* ViewController.swift in Sources */,
+				4D8B08C42A4D9165009332D5 /* Images.swift in Sources */,
 				4D300DE32A45AB87003814D4 /* TaskStackView.swift in Sources */,
 				4D68F12C2A43385C003BEEC1 /* TaskViewController.swift in Sources */,
+				4D8B08C82A4FA61B009332D5 /* ToDoErrors.swift in Sources */,
+				4D86FE9D2A4B191200BCA7AC /* TableViewCell.swift in Sources */,
+				4D86FE972A4A41D100BCA7AC /* MainScreenViewController.swift in Sources */,
+				4D8B08BF2A4B5877009332D5 /* Constants.swift in Sources */,
 				4D86FE8E2A46738500BCA7AC /* DeleteButton.swift in Sources */,
+				4D86FE992A4A441800BCA7AC /* ToDoTableView.swift in Sources */,
 				4DD4D7582A35EF1C001315A8 /* TodoItem.swift in Sources */,
 				4DD4D7432A35EECE001315A8 /* AppDelegate.swift in Sources */,
 				4D2D9BA32A3D5D06003A2752 /* testModels.swift in Sources */,
+				4D8B08C12A4B6294009332D5 /* HiddenTasksView.swift in Sources */,
 				4DD4D75C2A3786AF001315A8 /* FileCache.swift in Sources */,
 				4DD4D7452A35EECE001315A8 /* SceneDelegate.swift in Sources */,
 			);

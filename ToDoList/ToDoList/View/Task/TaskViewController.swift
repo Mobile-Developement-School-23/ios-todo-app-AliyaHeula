@@ -6,49 +6,62 @@
 //
 
 import UIKit
+protocol TaskViewDelegate {
+    func updateTasks(updatedItem: TodoItem)
+}
 
 final class TaskViewController: UIViewController {
 
-    let taskTextView = TaskTextView()
-    let stackView = TaskStackView()
-    let deleteButton = DeleteButton()
-    
-    override var navigationController: UINavigationController? {
-        UINavigationController()
+//MARK: - Properies
+
+    private let taskTextView = TaskTextView()
+    private let stackView = TaskStackView()
+    private let deleteButton = DeleteButton()
+    private var item: TodoItem?
+    private var taskText: String?
+
+    var delegate: TaskViewDelegate?
+
+//MARK: -
+    init() {
+        super.init(nibName: nil, bundle: nil)
+
     }
+
+
+    init(item: TodoItem) {
+        self.item = item
+        super.init(nibName: nil, bundle: nil)
+        taskText = item.text
+
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+
+
 
     override func viewDidLoad() {
         
         super.viewDidLoad()
+
+        becomeFirstResponder()
+
         setNavigationBar()
-//        taskTextView.setTaskTextView()
-        view.addSubview(taskTextView.setTaskTextView())
+        taskTextView.setTaskTextView()
+        taskTextView.text = self.taskText ?? "Что надо сделать?"
+        view.addSubview(taskTextView)
         setTaskTextViewConstraints()
         view.addSubview(stackView.setStackView())
         setStackConstraints()
-//        view.addSubview(deleteButton.setDeleteButton())
         view.addSubview(deleteButton.setDeleteButton())
         setDeleteButtonConstraints()
 
     }
 
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//        if !stackView.deadlineSwitch.isOn {
-//            view.layoutIfNeeded()
-//        }
-//    }
     private func setDeleteButtonConstraints() {
-//        deleteButton.translatesAutoresizingMaskIntoConstraints = false
-//        NSLayoutConstraint.activate([
-//            deleteButton.topAnchor.constraint(equalTo: stackView.stack.bottomAnchor, constant: 16),
-//            deleteButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-//            deleteButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-//            deleteButton.heightAnchor.constraint(equalToConstant: 56),
-//
-//        ])
-//        deleteButton.layer.cornerRadius = 16
-
         deleteButton.button.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             deleteButton.button.topAnchor.constraint(equalTo: stackView.stack.bottomAnchor, constant: 16),
@@ -72,13 +85,15 @@ final class TaskViewController: UIViewController {
     }
 
     private func setNavigationBar() {
-        view.backgroundColor = UIColor(red: 247 / 255, green: 246 / 255, blue: 242 / 255, alpha: 1)
-        title = "Дело"
-        let cancelButton = UIBarButtonItem(title: "Отменить", style: .plain, target: self, action: nil)
+        view.backgroundColor = Colors.backPrimary
+        self.title = "Дело"
+
+        let cancelButton = UIBarButtonItem(title: "Отменить", style: .plain, target: self, action: #selector(cancelButtonTapped))
         navigationItem.leftBarButtonItem = cancelButton
-        let saveButton = UIBarButtonItem(title: "Сохранить", style: .done, target: self, action: #selector(saveButtonButtonTapped))
+        let saveButton = UIBarButtonItem(title: "Сохранить", style: .done, target: self, action: #selector(saveButtonTapped))
         navigationItem.rightBarButtonItem = saveButton
-        navigationItem.rightBarButtonItem?.isEnabled = false
+//        navigationItem.rightBarButtonItem?.isEnabled = false
+
     }
 
     private func setTaskTextViewConstraints() {
@@ -97,16 +112,25 @@ final class TaskViewController: UIViewController {
         self.taskTextView.resignFirstResponder()
     }
 
-    @objc func cancelButtonButtonTapped() {
+    @objc func cancelButtonTapped() {
+        dismiss(animated: true)
     }
 
-    @objc func saveButtonButtonTapped() {
+    @objc func saveButtonTapped() {
+        var newItem: TodoItem {
+            if item != nil {
+                return (TodoItem(id: item?.id, text: taskTextView.text, importance: .high, deadline: nil, isDone: false, createdOn: .now, changedOn: nil))
+            } else {
+                return (TodoItem(id: nil, text: taskTextView.text, importance: .high, deadline: nil, isDone: false, createdOn: .now, changedOn: nil))
+            }
+        }
+        self.delegate?.updateTasks(updatedItem: newItem)
+        
     }
 
     override func viewWillAppear(_ animated: Bool) {
 
     }
-
 }
 
 

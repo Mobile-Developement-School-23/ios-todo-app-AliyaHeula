@@ -8,17 +8,17 @@ enum Importance: String {
 
 struct TodoItem {
     let id: String
-    let text: String
-    let importance: Importance
-    let deadline: Date?
-    let isDone: Bool
+    var text: String
+    var importance: Importance
+    var deadline: Date?
+    var isDone: Bool
     let createdOn: Date
-    let changedOn: Date?
+    var changedOn: Date?
     
     init(id: String?, text: String, importance: Importance, deadline: Date?, isDone: Bool, createdOn: Date, changedOn: Date?) {
         self.id = id ?? UUID().uuidString
         self.text = text
-        self.importance = importance
+        self.importance = importance    
         self.deadline = deadline
         self.isDone = isDone
         self.createdOn = createdOn

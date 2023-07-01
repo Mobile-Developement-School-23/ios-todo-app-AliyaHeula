@@ -81,3 +81,9 @@ final class FileCache {
         return true
     }
 }
+
+//extension FileCache {
+//    public func numberOfDoneTasks() -> Int {
+//        toDoItems.filter{$0.value.isDone == true}.count
+//    }
+//}
