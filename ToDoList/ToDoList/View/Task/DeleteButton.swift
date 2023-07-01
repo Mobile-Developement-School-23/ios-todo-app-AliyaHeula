@@ -8,7 +8,7 @@
 import UIKit
 
 //class DeleteButton: UIButton {
-class DeleteButton {
+final class DeleteButton {
 
     let button = UIButton(type: .roundedRect)
     func setDeleteButton() -> UIButton {

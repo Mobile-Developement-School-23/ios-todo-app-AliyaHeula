@@ -153,7 +153,7 @@ final class TaskStackView {
          calendarView.calendar = gregorianCalendar
          calendarView.locale = Locale(identifier: "ru_RU")
          calendarView.fontDesign = .default
-         let separator = createSeparator()
+//         let separator = createSeparator()
 //         stack.addSubview(separator)
          stack.addArrangedSubview(calendarView)
          calendarView.translatesAutoresizingMaskIntoConstraints = false
