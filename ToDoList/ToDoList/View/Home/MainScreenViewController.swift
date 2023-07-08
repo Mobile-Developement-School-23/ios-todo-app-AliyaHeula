@@ -46,14 +46,22 @@ class MainScreenViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        setControllerParameters()
-        setHiddenTasksBar()
-        setTableView()
-        setNewTaskButton()
+        do {
+            try testNetwork()
+        } catch {
+            print("Error: \(error)")
+        }
     }
+
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//        setControllerParameters()
+//        setHiddenTasksBar()
+//        setTableView()
+//        setNewTaskButton()
+//    }
 
     @objc func plusButtonTapped(){
         let taskViewController = TaskViewController()

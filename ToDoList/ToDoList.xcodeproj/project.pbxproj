@@ -25,6 +25,12 @@
 		4D8B08C62A4DF8D4009332D5 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8B08C52A4DF8D4009332D5 /* Colors.swift */; };
 		4D8B08C82A4FA61B009332D5 /* ToDoErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8B08C72A4FA61B009332D5 /* ToDoErrors.swift */; };
 		4D8B08CB2A4FBD6D009332D5 /* CocoaLumberjack in Frameworks */ = {isa = PBXBuildFile; productRef = 4D8B08CA2A4FBD6D009332D5 /* CocoaLumberjack */; };
+		4DC7ECBC2A54B5D300BA096B /* URLSession+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC7ECBB2A54B5D300BA096B /* URLSession+extension.swift */; };
+		4DC7ECCB2A55AAA800BA096B /* DefaultNetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC7ECCA2A55AAA800BA096B /* DefaultNetworkingService.swift */; };
+		4DC7ECCD2A55C09C00BA096B /* NetworkTodoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC7ECCC2A55C09C00BA096B /* NetworkTodoItem.swift */; };
+		4DC7ECCF2A562F9E00BA096B /* testNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC7ECCE2A562F9E00BA096B /* testNetwork.swift */; };
+		4DC7ECD12A5826EE00BA096B /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC7ECD02A5826EE00BA096B /* NetworkRequest.swift */; };
+		4DC7ECD32A58676E00BA096B /* RequestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC7ECD22A58676E00BA096B /* RequestType.swift */; };
 		4DD4D7432A35EECE001315A8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD4D7422A35EECE001315A8 /* AppDelegate.swift */; };
 		4DD4D7452A35EECE001315A8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD4D7442A35EECE001315A8 /* SceneDelegate.swift */; };
 		4DD4D74C2A35EED0001315A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DD4D74B2A35EED0001315A8 /* Assets.xcassets */; };
@@ -49,6 +55,12 @@
 		4D8B08C32A4D9165009332D5 /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		4D8B08C52A4DF8D4009332D5 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		4D8B08C72A4FA61B009332D5 /* ToDoErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoErrors.swift; sourceTree = "<group>"; };
+		4DC7ECBB2A54B5D300BA096B /* URLSession+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+extension.swift"; sourceTree = "<group>"; };
+		4DC7ECCA2A55AAA800BA096B /* DefaultNetworkingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultNetworkingService.swift; sourceTree = "<group>"; };
+		4DC7ECCC2A55C09C00BA096B /* NetworkTodoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTodoItem.swift; sourceTree = "<group>"; };
+		4DC7ECCE2A562F9E00BA096B /* testNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testNetwork.swift; sourceTree = "<group>"; };
+		4DC7ECD02A5826EE00BA096B /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
+		4DC7ECD22A58676E00BA096B /* RequestType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestType.swift; sourceTree = "<group>"; };
 		4DD4D73F2A35EECE001315A8 /* ToDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DD4D7422A35EECE001315A8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4DD4D7442A35EECE001315A8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -128,6 +140,18 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		4DC7ECC92A55AA8100BA096B /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				4DC7ECCA2A55AAA800BA096B /* DefaultNetworkingService.swift */,
+				4DC7ECCC2A55C09C00BA096B /* NetworkTodoItem.swift */,
+				4DC7ECCE2A562F9E00BA096B /* testNetwork.swift */,
+				4DC7ECD02A5826EE00BA096B /* NetworkRequest.swift */,
+				4DC7ECD22A58676E00BA096B /* RequestType.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		4DD4D7362A35EECE001315A8 = {
 			isa = PBXGroup;
 			children = (
@@ -166,7 +190,9 @@
 				4D3EB9C62A4FDA8200B2D693 /* FileCache.swift */,
 				4D3EB9C72A4FDA8200B2D693 /* TodoItem.swift */,
 				4D86FE8F2A46A47B00BCA7AC /* testFile.json */,
+				4DC7ECC92A55AA8100BA096B /* Network */,
 				4D8B08C22A4D9138009332D5 /* Utils */,
+				4DC7ECBB2A54B5D300BA096B /* URLSession+extension.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -250,17 +276,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D3EB9C92A4FDA8200B2D693 /* TodoItem.swift in Sources */,
+				4DC7ECCB2A55AAA800BA096B /* DefaultNetworkingService.swift in Sources */,
 				4D86FE932A46A58F00BCA7AC /* TasksLaunching.swift in Sources */,
 				4D8B08C62A4DF8D4009332D5 /* Colors.swift in Sources */,
 				4D300DE12A45A51C003814D4 /* TaskTextView.swift in Sources */,
 				4D8B08C42A4D9165009332D5 /* Images.swift in Sources */,
 				4D300DE32A45AB87003814D4 /* TaskStackView.swift in Sources */,
 				4D3EB9C82A4FDA8200B2D693 /* FileCache.swift in Sources */,
+				4DC7ECD12A5826EE00BA096B /* NetworkRequest.swift in Sources */,
+				4DC7ECCF2A562F9E00BA096B /* testNetwork.swift in Sources */,
+				4DC7ECCD2A55C09C00BA096B /* NetworkTodoItem.swift in Sources */,
 				4D68F12C2A43385C003BEEC1 /* TaskViewController.swift in Sources */,
+				4DC7ECBC2A54B5D300BA096B /* URLSession+extension.swift in Sources */,
 				4D8B08C82A4FA61B009332D5 /* ToDoErrors.swift in Sources */,
 				4D86FE9D2A4B191200BCA7AC /* TableViewCell.swift in Sources */,
 				4D86FE972A4A41D100BCA7AC /* MainScreenViewController.swift in Sources */,
 				4D8B08BF2A4B5877009332D5 /* Constants.swift in Sources */,
+				4DC7ECD32A58676E00BA096B /* RequestType.swift in Sources */,
 				4D86FE8E2A46738500BCA7AC /* DeleteButton.swift in Sources */,
 				4D86FE992A4A441800BCA7AC /* ToDoTableView.swift in Sources */,
 				4DD4D7432A35EECE001315A8 /* AppDelegate.swift in Sources */,
