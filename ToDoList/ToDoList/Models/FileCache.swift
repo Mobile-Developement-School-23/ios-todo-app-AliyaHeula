@@ -48,6 +48,7 @@ class FileCache {
 
 
     func saveAllFromJSON (fileName: String, fileExtension: String) -> Bool {
+        var downloadedList = [TodoItem]()
         guard let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
             print("File saving directory is not found")
             return false
@@ -69,7 +70,7 @@ class FileCache {
             if let itemsArray = json {
                 for (item) in itemsArray {
                     if let itemToParse = TodoItem.parse(json: item) {
-                        self.addNewItem(newItem: itemToParse)
+                        downloadedList.append(itemToParse)
                     }
                 }
             } else {
@@ -79,6 +80,10 @@ class FileCache {
         } catch {
             print(error.localizedDescription)
             return false
+        }
+        let tmp = downloadedList.sorted {$0.createdOn < $1.createdOn}
+        for item in tmp {
+            self.toDoItems.updateValue(item, forKey: item.id)
         }
         return true
     }
