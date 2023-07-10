@@ -5,10 +5,10 @@ import spm
 class FileCache {
     private(set) var toDoItems:[String:TodoItem] = [:]
 
-    func addNewItem(id: String?, text: String, importance: Importance, deadline: Date?, isDone: Bool) {
-        let newItem = TodoItem(id: id, text: text, importance: importance, deadline: deadline, isDone: isDone, createdOn: Date(), changedOn: nil)
-        toDoItems.updateValue(newItem, forKey: newItem.id)
-    }
+//    func addNewItem(id: String?, text: String, importance: Importance, deadline: Date?, isDone: Bool) {
+//        let newItem = TodoItem(id: id, text: text, importance: importance, deadline: deadline, isDone: isDone, createdOn: Date(), changedOn: nil)
+//        toDoItems.updateValue(newItem, forKey: newItem.id)
+//    }
 
     func addNewItem(newItem: TodoItem) {
         toDoItems.updateValue(newItem, forKey: newItem.id)
@@ -81,16 +81,11 @@ class FileCache {
             print(error.localizedDescription)
             return false
         }
-        let tmp = downloadedList.sorted {$0.createdOn < $1.createdOn}
+        let tmp = downloadedList.sorted {$0.createdOn > $1.createdOn}
         for item in tmp {
             self.toDoItems.updateValue(item, forKey: item.id)
         }
+        print(url)
         return true
     }
 }
-
-//extension FileCache {
-//    public func numberOfDoneTasks() -> Int {
-//        toDoItems.filter{$0.value.isDone == true}.count
-//    }
-//}

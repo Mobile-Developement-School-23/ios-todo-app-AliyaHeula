@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import spm
+
 protocol TaskViewDelegate {
     func updateTasks(updatedItem: TodoItem)
 }
@@ -15,22 +17,24 @@ final class TaskViewController: UIViewController {
 //MARK: - Properies
 
     private let taskTextView = TaskTextView()
-    private let stackView = TaskStackView()
+    private let stackView: TaskStackView
     private let deleteButton = DeleteButton()
-    private var item: TodoItem?
+    private var item: TodoItem
     private var taskText: String?
 
     var delegate: TaskViewDelegate?
 
 //MARK: -
     init() {
+        self.item = TodoItem(id: nil, text: "", importance: .medium, deadline: nil, isDone: false, createdOn: Date(), changedOn: nil)
+        self.stackView = TaskStackView(importance: nil, deadline: nil)
         super.init(nibName: nil, bundle: nil)
-
     }
 
 
     init(item: TodoItem) {
         self.item = item
+        self.stackView = TaskStackView(importance: item.importance, deadline: item.deadline)
         super.init(nibName: nil, bundle: nil)
         taskText = item.text
 
@@ -40,14 +44,11 @@ final class TaskViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-
-
-
     override func viewDidLoad() {
         
         super.viewDidLoad()
 
-        becomeFirstResponder()
+//        becomeFirstResponder()
 
         setNavigationBar()
         taskTextView.setTaskTextView()
@@ -55,9 +56,12 @@ final class TaskViewController: UIViewController {
         view.addSubview(taskTextView)
         setTaskTextViewConstraints()
         view.addSubview(stackView.setStackView())
+        
         setStackConstraints()
         view.addSubview(deleteButton.setDeleteButton())
         setDeleteButtonConstraints()
+
+//        stackView.importanceSegmControl.addTarget(self, action: #selector(changeImportance), for: .allEvents)
 
     }
 
@@ -117,14 +121,12 @@ final class TaskViewController: UIViewController {
     }
 
     @objc func saveButtonTapped() {
-        var newItem: TodoItem {
-            if item != nil {
-                return (TodoItem(id: item?.id, text: taskTextView.text, importance: .high, deadline: nil, isDone: false, createdOn: .now, changedOn: nil))
-            } else {
-                return (TodoItem(id: nil, text: taskTextView.text, importance: .high, deadline: nil, isDone: false, createdOn: .now, changedOn: nil))
-            }
-        }
-        self.delegate?.updateTasks(updatedItem: newItem)
+
+        self.item.text = self.taskTextView.text
+        self.item.importance = self.stackView.importance
+        self.item.deadline = self.stackView.deadline
+        self.item.changedOn = Date()
+        self.delegate?.updateTasks(updatedItem: item)
         
     }
 

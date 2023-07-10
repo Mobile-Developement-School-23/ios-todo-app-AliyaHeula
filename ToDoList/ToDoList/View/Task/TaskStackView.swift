@@ -6,14 +6,27 @@
 //
 
 import UIKit
+import spm
 
 final class TaskStackView {
 
+    var importance: Importance
+    var importanceSegmControl = UISegmentedControl()
     let importanceRow = UIView()
-    let deadlineRow = UIView()
+
+    var deadline: Date?
     let deadlineSwitch = UISwitch()
+    let deadlineRow = UIView()
 
     let stack = UIStackView()
+
+    init(importance: Importance?, deadline: Date?) {
+        self.importance = importance ?? Importance.medium
+        self.deadline = deadline
+        if let deadline = deadline {
+            self.deadline = deadline
+        }
+    }
 
     func setStackView() -> UIStackView {
         stack.axis = .vertical
@@ -123,7 +136,9 @@ final class TaskStackView {
         }
 
         let importanceSegmControl = UISegmentedControl(items: segmentsArray)
-        importanceSegmControl.selectedSegmentIndex = 2
+        importanceSegmControl.selectedSegmentIndex = Importance.allCases.firstIndex(of: self.importance) ?? 1
+        importanceSegmControl.addTarget(self, action: #selector(changeImportance), for: .valueChanged)
+
         importanceSegmControl.layer.cornerRadius = 9
 
         importanceRow.addSubview(importanceLabel)
@@ -145,6 +160,18 @@ final class TaskStackView {
             importanceSegmControl.heightAnchor.constraint(equalToConstant: 36),
             importanceSegmControl.widthAnchor.constraint(equalToConstant: 150)
         ])
+    }
+
+    @objc func changeImportance(sender: UISegmentedControl) {
+        
+        switch sender.selectedSegmentIndex {
+        case 0:
+            self.importance = .low
+        case 2:
+            self.importance = .high
+        default:
+            self.importance = .medium
+        }
     }
 
      @objc func openCalendar(sender: UIButton) {

@@ -70,12 +70,12 @@ extension TodoItem {
             dictionary["importance"] = self.importance.rawValue
         }
         if let deadline = self.deadline {
-            dictionary["deadline"] = Int(deadline.timeIntervalSince1970)
+            dictionary["deadline"] = deadline.timeIntervalSince1970
         }
         dictionary["isDone"] = self.isDone
-        dictionary["createdOn"] = Int(self.createdOn.timeIntervalSince1970)
+        dictionary["createdOn"] = self.createdOn.timeIntervalSince1970
         if let changedOn = self.changedOn {
-            dictionary["changedOn"] = Int(changedOn.timeIntervalSince1970)
+            dictionary["changedOn"] = changedOn.timeIntervalSince1970
         }
         return dictionary
     }
