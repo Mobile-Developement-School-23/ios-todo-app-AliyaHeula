@@ -44,19 +44,12 @@ final class TasksLaunching {
     static func programStart() {
         
         let test = FileCache()
-        test.addNewItem(id: "hardcode_id", text: "Hello!", importance: .low, deadline: Date(), isDone: true)
-        test.addNewItem(id: nil, text: "Salut Salut Salut Salut v Salut Salut v v Salut Salut Salut Salut Salut Salut Salut Salut Salut Salut Salut !", importance: .low, deadline: Date(), isDone: false)
-        test.addNewItem(id: "lll", text: "Salut S", importance: .low, deadline: Date(), isDone: false)
-        test.addNewItem(id: "ll2", text: "Salut S", importance: .high, deadline: Date(), isDone: false)
-//        test.addNewItem(id: "ll3", text: "Salut S", importance: .low, deadline: Date(), isDone: false)
-//        test.addNewItem(id: "ll4", text: "Salut S", importance: .low, deadline: Date(), isDone: false)
-//        test.addNewItem(id: "lll5", text: "Salut S", importance: .low, deadline: Date(), isDone: false)
-//        test.addNewItem(id: "lll6", text: "Salut S", importance: .low, deadline: Date(), isDone: false)
-//        test.addNewItem(id: "lll67", text: "Salut S", importance: .low, deadline: Date(), isDone: false)
-//        test.addNewItem(id: "lll677", text: "Salut S", importance: .low, deadline: Date(), isDone: false)
-//        test.addNewItem(id: "lll676", text: "Salut S", importance: .low, deadline: Date(), isDone: false)
-//        test.addNewItem(id: "lll674", text: "Salut S", importance: .low, deadline: Date(), isDone: false)
-//        test.addNewItem(id: "lll675", text: "Salut S", importance: .low, deadline: Date(), isDone: false)
+
+        test.addNewItem(newItem: TodoItem(id: "hardcode_id", text: "Hello!", importance: .low, deadline: nil, isDone: true, createdOn: Date(), changedOn: nil))
+        test.addNewItem(newItem: TodoItem(id: nil, text: "Salualut Salut Salut Salut Sal!", importance: .medium, deadline: Date(), isDone: false, createdOn: Date(), changedOn: nil))
+        test.addNewItem(newItem: TodoItem(id: "lll", text: "Salut S", importance: .low, deadline: Date(), isDone: false, createdOn: Date(), changedOn: nil))
+        test.addNewItem(newItem: TodoItem(id: "ll2", text: "Salut S", importance: .high, deadline: Date(), isDone: false, createdOn: Date(), changedOn: nil))
+
         _ = test.saveAllToJSON(fileName: "testFile", fileExtension: "json")
 
 

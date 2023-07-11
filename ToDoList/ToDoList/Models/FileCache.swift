@@ -5,10 +5,10 @@ import spm
 class FileCache {
     private(set) var toDoItems:[String:TodoItem] = [:]
 
-    func addNewItem(id: String?, text: String, importance: Importance, deadline: Date?, isDone: Bool) {
-        let newItem = TodoItem(id: id, text: text, importance: importance, deadline: deadline, isDone: isDone, createdOn: Date(), changedOn: nil)
-        toDoItems.updateValue(newItem, forKey: newItem.id)
-    }
+//    func addNewItem(id: String?, text: String, importance: Importance, deadline: Date?, isDone: Bool) {
+//        let newItem = TodoItem(id: id, text: text, importance: importance, deadline: deadline, isDone: isDone, createdOn: Date(), changedOn: nil)
+//        toDoItems.updateValue(newItem, forKey: newItem.id)
+//    }
 
     func addNewItem(newItem: TodoItem) {
         toDoItems.updateValue(newItem, forKey: newItem.id)
@@ -48,6 +48,7 @@ class FileCache {
 
 
     func saveAllFromJSON (fileName: String, fileExtension: String) -> Bool {
+        var downloadedList = [TodoItem]()
         guard let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
             print("File saving directory is not found")
             return false
@@ -69,7 +70,7 @@ class FileCache {
             if let itemsArray = json {
                 for (item) in itemsArray {
                     if let itemToParse = TodoItem.parse(json: item) {
-                        self.addNewItem(newItem: itemToParse)
+                        downloadedList.append(itemToParse)
                     }
                 }
             } else {
@@ -80,12 +81,11 @@ class FileCache {
             print(error.localizedDescription)
             return false
         }
+        let tmp = downloadedList.sorted {$0.createdOn > $1.createdOn}
+        for item in tmp {
+            self.toDoItems.updateValue(item, forKey: item.id)
+        }
+        print(url)
         return true
     }
 }
-
-//extension FileCache {
-//    public func numberOfDoneTasks() -> Int {
-//        toDoItems.filter{$0.value.isDone == true}.count
-//    }
-//}
