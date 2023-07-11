@@ -13,7 +13,7 @@ final class TableViewCell: UITableViewCell {
 //MARK: - Properties
 
     static let identifier = "TableViewCell"
-    let taskTextLabel = makeTaskTextLabel()
+    var taskTextLabel = makeTaskTextLabel()
 
     lazy var deadlineDateLabel: UILabel = {
         let label = UILabel()
@@ -76,6 +76,14 @@ final class TableViewCell: UITableViewCell {
 //
 //
 //    }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+//        self.calendarImageView = UIImageView()
+//        self.deadlineDateLabel = UILabel()
+//        self.propButton = UIButton()
+//        self.taskTextLabel = UILabel()
+    }
 
 
     // MARK: - Set and Constraints Funcs
