@@ -11,12 +11,93 @@ class FileCache {
 //    }
 
     func addNewItem(newItem: TodoItem) {
-        toDoItems.updateValue(newItem, forKey: newItem.id)
+        if toDoItems[newItem.id] == nil {
+            toDoItems.updateValue(newItem, forKey: newItem.id)
+            insertOneToDatabase(item: newItem)
+        } else {
+            toDoItems.updateValue(newItem, forKey: newItem.id)
+            updateOneInDatabase(item: newItem)
+        }
     }
 
     func deleteItemBy(id: String) {
+        deleteFromDatabase(id: id)
         toDoItems.removeValue(forKey: id)
     }
+
+//MARK: - SQL
+
+    func save() -> Bool {
+        do {
+            let sqlDatabase = try SQLDatabase()
+            try sqlDatabase.recreateDatabase()
+            for item in self.toDoItems {
+                let stringToReplace = item.value.sqlReplaceStatement
+                try sqlDatabase.replaceOne(string: stringToReplace)
+            }
+        } catch {
+            print("Error: \(error)")
+            return false
+        }
+        return true
+    }
+
+    func load() -> Bool {
+        var newList:[String:TodoItem] = [:]
+        do {
+            let sqlDatabase = try SQLDatabase()
+//            let orderedTable = sqlDatabase.todoList.order(sqlDatabase.createdOn)
+            let table = sqlDatabase.todoList
+            for item in try sqlDatabase.db.prepare(table) {
+                let newItem = TodoItem(id: item[sqlDatabase.id],
+                                       text: item[sqlDatabase.text],
+                                       importance: Importance(rawValue: item[sqlDatabase.importance]) ?? .medium,
+                                       deadline: item[sqlDatabase.deadline],
+                                       isDone: item[sqlDatabase.isDone],
+                                       createdOn: item[sqlDatabase.createdOn],
+                                       changedOn: item[sqlDatabase.changedOn])
+                newList.updateValue(newItem, forKey: newItem.id)
+            }
+            self.toDoItems = newList
+        } catch {
+            print("Error: \(error)")
+            return false
+        }
+        return true
+    }
+
+    func deleteFromDatabase(id: String) {
+        do {
+            let sqlDatabase = try SQLDatabase()
+            if try sqlDatabase.deleteOneById(id: id) == 1 {
+                print("Deleted item")
+            }
+        } catch {
+            print("Error: \(error)")
+        }
+    }
+
+    func insertOneToDatabase(item: TodoItem) {
+        do {
+            let sqlDatabase = try SQLDatabase()
+            let rowId = try sqlDatabase.insertOne(item: item)
+            print("Inserted new item with rowId: \(rowId)")
+        } catch {
+            print("Error: \(error)")
+        }
+    }
+
+    func updateOneInDatabase(item: TodoItem) {
+        do {
+            let sqlDatabase = try SQLDatabase()
+            let _ = try sqlDatabase.updateOne(item: item)
+            print("Updated item")
+        } catch {
+            print("Error: \(error)")
+        }
+    }
+
+//MARK: - JSON
 
     func saveAllToJSON(fileName: String, fileExtension: String) -> Bool {
         guard let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
@@ -45,7 +126,6 @@ class FileCache {
         JSONSerialization.writeJSONObject(jsonArray, to: outputStream, options: [.prettyPrinted], error: NSErrorPointer(nil))
         return true
     }
-
 
     func saveAllFromJSON (fileName: String, fileExtension: String) -> Bool {
         var downloadedList = [TodoItem]()
@@ -85,7 +165,7 @@ class FileCache {
         for item in tmp {
             self.toDoItems.updateValue(item, forKey: item.id)
         }
-        print(url)
         return true
     }
+
 }
