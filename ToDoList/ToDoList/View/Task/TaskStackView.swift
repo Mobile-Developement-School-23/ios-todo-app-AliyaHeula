@@ -16,19 +16,26 @@ final class TaskStackView {
 
     var deadline: Date?
     let deadlineSwitch = UISwitch()
-    let calendarView = UICalendarView()
+    let calendar: UICalendarView = {
+        let gregorianCalendar = Calendar(identifier: .gregorian)
+        let calendar = UICalendarView()
+        calendar.calendar = gregorianCalendar
+        calendar.locale = Locale(identifier: "ru")
+        calendar.fontDesign = .default
+        return calendar
+    }()
 //   @objc let deadlineDate = UIButton(type: .roundedRect)
     let deadlineRow = UIView()
-//    var isDeadlineExist: Bool
+    var isCalendarOpen = false
 
-//    let stack = UIStackView()
-    var stack: UIStackView = {
+
+    lazy var stack: UIStackView = {
         let newStack = UIStackView()
         newStack.axis = .vertical
         newStack.alignment = .fill
         newStack.distribution = .equalSpacing
         newStack.spacing = 0
-        newStack.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
+        newStack.backgroundColor = Colors.backSecondary
         return newStack
     }()
 
@@ -36,28 +43,17 @@ final class TaskStackView {
         self.importance = importance ?? Importance.medium
         self.deadline = deadline
 
-
-
-//        isDeadlineExist = deadline == nil ? false : true
     }
 
 //MARK: - Stack View
 
     func setStackView() -> UIStackView {
-//        stack.axis = .vertical
-//        stack.alignment = .fill
-//        stack.distribution = .equalSpacing
-//        stack.spacing = 0
-        //        stack.isLayoutMarginsRelativeArrangement = true
-
-//        stack.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         
         createImportanceRow()
         createDeadlineRow()
         stack.addArrangedSubview(importanceRow)
         stack.addArrangedSubview(createSeparator())
         stack.addArrangedSubview(deadlineRow)
-        //        stack.addArrangedSubview(createSeparator())
 
         return stack
 
@@ -65,14 +61,19 @@ final class TaskStackView {
 
     func createSeparator() -> UIView{
         let separator = UIView()
-        separator.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2)
+        let line = UIView()
+        line.backgroundColor = Colors.supportSeparator
 
         separator.translatesAutoresizingMaskIntoConstraints = false
+        line.translatesAutoresizingMaskIntoConstraints = false
+
+        separator.addSubview(line)
         NSLayoutConstraint.activate([
             separator.heightAnchor.constraint(equalToConstant: 1.0 / UIScreen.main.scale),
-            //            separator.widthAnchor.constraint(equalToConstant: 311),
-            //            separator.leftAnchor.constraint(equalTo: stack.leftAnchor, constant: 16),
-            //            separator.rightAnchor.constraint(equalTo: stack.rightAnchor, constant: -16)
+            line.heightAnchor.constraint(equalTo:separator.heightAnchor),
+            line.leadingAnchor.constraint(equalTo: separator.leadingAnchor, constant: 16),
+            line.trailingAnchor.constraint(equalTo: separator.trailingAnchor, constant: -16)
+
         ])
         return separator
     }
@@ -91,9 +92,7 @@ final class TaskStackView {
         dateFormatter.timeZone = NSTimeZone(abbreviation: "UTC")! as TimeZone
 
 
-//        if isDeadlineExist == true {
         if self.deadline != nil {
-//            deadlineDate.setTitle(dateFormatter.string(from: Date(timeInterval: 86400, since: Date())),
             deadlineDate.setTitle(dateFormatter.string(from: self.deadline!),
                                   for: .normal)
             deadlineDate.setTitleColor(UIColor(red: 0, green: 122 / 255, blue: 1, alpha: 1),
@@ -109,9 +108,6 @@ final class TaskStackView {
         deadlineRow.translatesAutoresizingMaskIntoConstraints = false
         deadlineLabel.translatesAutoresizingMaskIntoConstraints = false
         deadlineSwitch.translatesAutoresizingMaskIntoConstraints = false
-
-
-
 
         NSLayoutConstraint.activate([
             deadlineSwitch.topAnchor.constraint(equalTo: deadlineRow.topAnchor, constant: 12.5),
@@ -175,27 +171,29 @@ final class TaskStackView {
         }
     }
 
-     @objc func openCalendar(sender: UIButton) {
-//         let calendarView = UICalendarView()
-         let gregorianCalendar = Calendar(identifier: .gregorian)
-         calendarView.calendar = gregorianCalendar
-         calendarView.locale = Locale(identifier: "ru_RU")
-         calendarView.fontDesign = .default
-//         let separator = createSeparator()
-//         stack.addSubview(separator)
-         stack.addArrangedSubview(calendarView)
-//
-//         let dateSelection = UICalendarSelectionSingleDate(delegate: self)
-//         calendarView.selectionBehavior = dateSelection
-//         calendarView.delegate = self
+    let calendarView = UIView()
 
-         calendarView.translatesAutoresizingMaskIntoConstraints = false
-         NSLayoutConstraint.activate([
-            calendarView.topAnchor.constraint(equalTo: deadlineRow.bottomAnchor),
-//            calendarView.topAnchor.constraint(equalTo: separator.bottomAnchor),
-            calendarView.heightAnchor.constraint(equalToConstant: 332),
-            calendarView.widthAnchor.constraint(equalToConstant: 343)
-         ])
+     @objc func openCalendar(sender: UIButton) {
+         if isCalendarOpen == false {
+             isCalendarOpen = true
+
+             calendarView.addSubview(calendar)
+
+             stack.addArrangedSubview(createSeparator())
+             stack.addArrangedSubview(calendarView)
+
+             calendar.translatesAutoresizingMaskIntoConstraints = false
+             calendarView.translatesAutoresizingMaskIntoConstraints = false
+             NSLayoutConstraint.activate([
+                calendarView.heightAnchor.constraint(equalTo: calendar.heightAnchor),
+                calendar.topAnchor.constraint(equalTo: calendarView.topAnchor),
+                calendar.leftAnchor.constraint(equalTo: calendarView.leftAnchor, constant: 16),
+                calendar.rightAnchor.constraint(equalTo: calendarView.rightAnchor, constant: -16)
+             ])
+         } else {
+//             isCalendarOpen = false
+//             stack.removeArrangedSubview(calendarView)
+         }
     }
 
 //MARK: - Importance part

@@ -63,7 +63,7 @@ final class TaskViewController: UIViewController {
 
 
         let dateSelection = UICalendarSelectionSingleDate(delegate: self)
-        self.stackView.calendarView.selectionBehavior = dateSelection
+        self.stackView.calendar.selectionBehavior = dateSelection
     }
 
     private func setDeleteButtonConstraints() {
