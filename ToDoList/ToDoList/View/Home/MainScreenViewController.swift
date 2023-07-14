@@ -148,6 +148,11 @@ extension MainScreenViewController: UITableViewDataSource, UITableViewDelegate {
             cell.taskTextLabel.textColor = Colors.labelTertiary
             cell.propButton.setImage(UIImage(), for: .normal)
         }
+
+//        if indexPath.row == items.count {
+//            cell.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+//            cell.layer.cornerRadius = 16
+//        }
         return cell
     }
 
@@ -198,7 +203,11 @@ extension MainScreenViewController: UITableViewDataSource, UITableViewDelegate {
             return UISwipeActionsConfiguration()
         }
         let completeAction = UIContextualAction(style: .destructive, title: nil, handler: {_,_,_ in
-            self.items[indexPath.item].isDone = true
+            if self.items[indexPath.item].isDone == false {
+                self.items[indexPath.item].isDone = true
+            } else {
+                self.items[indexPath.item].isDone = false
+            }
             self.toDoTableView.reloadData()
             self.tasks.updateCache(item: self.items[indexPath.item], action: .update)
         })
