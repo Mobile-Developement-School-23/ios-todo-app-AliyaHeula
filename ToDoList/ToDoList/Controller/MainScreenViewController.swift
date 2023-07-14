@@ -38,7 +38,7 @@ class MainScreenViewController: UIViewController {
 //MARK: -
 
     init() {
-        items = tasks.cache.toDoItems.map {$0.value}
+        self.items = tasks.cache.toDoItems.map {$0.value}.sorted{$0.createdOn > $1.createdOn}
         super.init(nibName: nil, bundle: nil)
 
     }
@@ -140,16 +140,24 @@ extension MainScreenViewController: UITableViewDataSource, UITableViewDelegate {
         if indexPath.item != items.count {
 //            let currentTask = items[items.index(items.startIndex, offsetBy: indexPath.item)].value
             let currentTask = items[indexPath.item]
-            let propImage = choosePropImage(item: currentTask)
 
             cell.accessoryType = .disclosureIndicator
 
+            let propImage = choosePropImage(item: currentTask)
             cell.propButton.setImage(propImage, for: .normal)
             cell.propButton.addTarget(self, action: #selector(pushPropButton), for: .touchDown)
-//            cell.taskTextLabel.text = currentTask.importance == .high ? "‼️" + currentTask.text : currentTask.text
-            cell.taskTextLabel.text = currentTask.text
+//            cell.propButton.addTarget(self, action: pushPropButton(index: indexPath.row), for: .touchDown)
+
+
+            if currentTask.importance == .high && !currentTask.isDone {
+                cell.taskTextLabel.text = "‼️" + currentTask.text
+            } else {
+                cell.taskTextLabel.text = currentTask.text
+            }
+
             if let deadline = currentTask.deadline {
                 cell.deadlineDateLabel.text = createDeadlineString(date: deadline)
+                cell.deadlineDateLabel.textColor = Colors.labelTertiary
                 cell.calendarImageView.image = Images.calendar
             }
         } else {
@@ -157,24 +165,32 @@ extension MainScreenViewController: UITableViewDataSource, UITableViewDelegate {
             cell.taskTextLabel.textColor = Colors.labelTertiary
             cell.propButton.setImage(UIImage(), for: .normal)
         }
+
+//        if indexPath.row == items.count {
+//            cell.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+//            cell.layer.cornerRadius = 16
+//        }
         return cell
     }
 
-    @objc private func pushPropButton(index: Int) {
+    @objc func pushPropButton(sender: UIButton) {
 
-//        if items[index].isDone == true {
-//            items[index].isDone = false
-//        } else {
-//            items[index].isDone = true
-//        }
-//        toDoTableView.reloadData()
-    }
+            print("Button tapped")
+            //        if items[index].isDone == true {
+            //            items[index].isDone = false
+            //        } else {
+            //            items[index].isDone = true
+            //        }
+            //        toDoTableView.reloadData()
+        }
+
+
 
     private func createDeadlineString(date: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "ru_RU")
         dateFormatter.dateFormat = "d MMMM"
-        dateFormatter.timeZone = NSTimeZone(abbreviation: "UTC+3")! as TimeZone
+        dateFormatter.timeZone = NSTimeZone(abbreviation: "UTC")! as TimeZone
         let dateString = dateFormatter.string(from: date)
         return dateString
     }
@@ -207,7 +223,11 @@ extension MainScreenViewController: UITableViewDataSource, UITableViewDelegate {
             return UISwipeActionsConfiguration()
         }
         let completeAction = UIContextualAction(style: .destructive, title: nil, handler: {_,_,_ in
-            self.items[indexPath.item].isDone = true
+            if self.items[indexPath.item].isDone == false {
+                self.items[indexPath.item].isDone = true
+            } else {
+                self.items[indexPath.item].isDone = false
+            }
             self.toDoTableView.reloadData()
             self.tasks.updateCache(item: self.items[indexPath.item], action: .update)
         })
@@ -264,7 +284,7 @@ extension MainScreenViewController: TaskViewDelegate {
                 }
                 i += 1
             }
-            self.items.append(updatedItem)
+            self.items.insert(updatedItem, at: 0)
         })
     }
 

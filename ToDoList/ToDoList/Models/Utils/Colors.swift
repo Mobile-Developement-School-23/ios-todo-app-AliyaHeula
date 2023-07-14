@@ -19,6 +19,8 @@ enum Colors {
     static let colorRed = UIColor(named: "ColorRed")
     static let colorGreen = UIColor(named: "ColorGreen")
     static let colorBlue = UIColor(named: "ColorBlue")
+    
+    static let supportSeparator = UIColor(named: "SupportSeparator")
 
 
 }
