@@ -61,8 +61,9 @@ final class TaskViewController: UIViewController {
         view.addSubview(deleteButton.setDeleteButton())
         setDeleteButtonConstraints()
 
-//        stackView.importanceSegmControl.addTarget(self, action: #selector(changeImportance), for: .allEvents)
 
+        let dateSelection = UICalendarSelectionSingleDate(delegate: self)
+        self.stackView.calendarView.selectionBehavior = dateSelection
     }
 
     private func setDeleteButtonConstraints() {
@@ -127,6 +128,7 @@ final class TaskViewController: UIViewController {
         self.item.deadline = self.stackView.deadline
         self.item.changedOn = Date()
         self.delegate?.updateTasks(updatedItem: item)
+        print(item)
         
     }
 
@@ -135,5 +137,11 @@ final class TaskViewController: UIViewController {
     }
 }
 
-
+extension TaskViewController: UICalendarSelectionSingleDateDelegate {
+    func dateSelection(_ selection: UICalendarSelectionSingleDate, didSelectDate dateComponents: DateComponents?) {
+        self.stackView.deadline = dateComponents?.date
+        self.view.layoutIfNeeded()
+        
+    }
+}
 

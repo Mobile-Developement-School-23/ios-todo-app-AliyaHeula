@@ -16,26 +16,42 @@ final class TaskStackView {
 
     var deadline: Date?
     let deadlineSwitch = UISwitch()
+    let calendarView = UICalendarView()
+//   @objc let deadlineDate = UIButton(type: .roundedRect)
     let deadlineRow = UIView()
+//    var isDeadlineExist: Bool
 
-    let stack = UIStackView()
+//    let stack = UIStackView()
+    var stack: UIStackView = {
+        let newStack = UIStackView()
+        newStack.axis = .vertical
+        newStack.alignment = .fill
+        newStack.distribution = .equalSpacing
+        newStack.spacing = 0
+        newStack.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
+        return newStack
+    }()
 
     init(importance: Importance?, deadline: Date?) {
         self.importance = importance ?? Importance.medium
         self.deadline = deadline
-        if let deadline = deadline {
-            self.deadline = deadline
-        }
+
+
+
+//        isDeadlineExist = deadline == nil ? false : true
     }
 
+//MARK: - Stack View
+
     func setStackView() -> UIStackView {
-        stack.axis = .vertical
-        stack.alignment = .fill
-        stack.distribution = .equalSpacing
-        stack.spacing = 0
+//        stack.axis = .vertical
+//        stack.alignment = .fill
+//        stack.distribution = .equalSpacing
+//        stack.spacing = 0
         //        stack.isLayoutMarginsRelativeArrangement = true
 
-        stack.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
+//        stack.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
+        
         createImportanceRow()
         createDeadlineRow()
         stack.addArrangedSubview(importanceRow)
@@ -61,26 +77,31 @@ final class TaskStackView {
         return separator
     }
 
+//MARK: - Deadline part
+
     func createDeadlineRow() {
         let deadlineLabel = UILabel()
         deadlineLabel.text = "Сделать до"
         deadlineLabel.font = UIFont(name: "GeezaPro", size: 17)
 
-//        let deadlineDate = UILabel()
-        let deadlineDate = UIButton(type: .roundedRect)
+        let deadlineDate = UIButton()
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "ru_RU")
         dateFormatter.dateFormat = "d MMMM yyyy"
         dateFormatter.timeZone = NSTimeZone(abbreviation: "UTC")! as TimeZone
 
 
-        deadlineDate.setTitle(dateFormatter.string(from: Date(timeInterval: 86400, since: Date())),
-                              for: .normal)
-        deadlineDate.setTitleColor(UIColor(red: 0, green: 122 / 255, blue: 1, alpha: 1),
-                                   for: .normal)
-        deadlineDate.titleLabel?.font = UIFont(name: "GeezaPro", size: 13)
-        deadlineDate.addTarget(self, action: #selector(openCalendar), for: .allEvents)
+//        if isDeadlineExist == true {
+        if self.deadline != nil {
+//            deadlineDate.setTitle(dateFormatter.string(from: Date(timeInterval: 86400, since: Date())),
+            deadlineDate.setTitle(dateFormatter.string(from: self.deadline!),
+                                  for: .normal)
+            deadlineDate.setTitleColor(UIColor(red: 0, green: 122 / 255, blue: 1, alpha: 1),
+                                       for: .normal)
+            deadlineDate.titleLabel?.font = UIFont(name: "GeezaPro", size: 13)
+            deadlineDate.addTarget(self, action: #selector(openCalendar), for: .allEvents)
 
+        }
 
         deadlineRow.addSubview(deadlineLabel)
         deadlineRow.addSubview(deadlineSwitch)
@@ -88,13 +109,32 @@ final class TaskStackView {
         deadlineRow.translatesAutoresizingMaskIntoConstraints = false
         deadlineLabel.translatesAutoresizingMaskIntoConstraints = false
         deadlineSwitch.translatesAutoresizingMaskIntoConstraints = false
+
+
+
+
         NSLayoutConstraint.activate([
             deadlineSwitch.topAnchor.constraint(equalTo: deadlineRow.topAnchor, constant: 12.5),
-            deadlineSwitch.trailingAnchor.constraint(equalTo: deadlineRow.trailingAnchor, constant: -12.5),
-            deadlineSwitch.bottomAnchor.constraint(equalTo: deadlineRow.bottomAnchor, constant: -12.5),])
+            deadlineSwitch.trailingAnchor.constraint(equalTo: deadlineRow.trailingAnchor, constant: -12),
+            deadlineSwitch.bottomAnchor.constraint(equalTo: deadlineRow.bottomAnchor, constant: -12.5),
 
-        deadlineSwitch.isOn = true
-        if !deadlineSwitch.isOn {
+//            deadlineLabel.heightAnchor.constraint(equalToConstant: 22),
+//            deadlineLabel.bottomAnchor.constraint(equalTo: deadlineDate.bottomAnchor),
+//            deadlineLabel.leadingAnchor.constraint(equalTo: deadlineRow.leadingAnchor, constant: 16),
+//
+//
+//            deadlineLabel.topAnchor.constraint(equalTo: deadlineRow.topAnchor, constant: 17),
+
+
+//            deadlineDate.heightAnchor.constraint(equalToConstant: 18),
+//            deadlineDate.bottomAnchor.constraint(equalTo: deadlineRow.bottomAnchor, constant: -8),
+//            deadlineDate.leadingAnchor.constraint(equalTo: deadlineRow.leadingAnchor, constant: 16)
+        ])
+
+        deadlineSwitch.isOn = self.deadline == nil ? false : true
+        deadlineSwitch.addTarget(self, action: #selector(tapDeadlineSwitcher), for: .valueChanged)
+
+        if self.deadline == nil {
             NSLayoutConstraint.activate([
                 deadlineLabel.topAnchor.constraint(equalTo: deadlineRow.topAnchor, constant: 17),
                 deadlineLabel.bottomAnchor.constraint(equalTo: deadlineRow.bottomAnchor, constant: -17),
@@ -121,6 +161,44 @@ final class TaskStackView {
 
 
     }
+
+    @objc func tapDeadlineSwitcher(sender: UISwitch) {
+        
+        if sender.isOn {
+//            if self.deadline == nil {
+                self.deadline = Date(timeInterval: 86400, since: Date())
+//                self.isDeadlineExist = true
+//            }
+        } else {
+            self.deadline = nil
+//            self.isDeadlineExist = false
+        }
+    }
+
+     @objc func openCalendar(sender: UIButton) {
+//         let calendarView = UICalendarView()
+         let gregorianCalendar = Calendar(identifier: .gregorian)
+         calendarView.calendar = gregorianCalendar
+         calendarView.locale = Locale(identifier: "ru_RU")
+         calendarView.fontDesign = .default
+//         let separator = createSeparator()
+//         stack.addSubview(separator)
+         stack.addArrangedSubview(calendarView)
+//
+//         let dateSelection = UICalendarSelectionSingleDate(delegate: self)
+//         calendarView.selectionBehavior = dateSelection
+//         calendarView.delegate = self
+
+         calendarView.translatesAutoresizingMaskIntoConstraints = false
+         NSLayoutConstraint.activate([
+            calendarView.topAnchor.constraint(equalTo: deadlineRow.bottomAnchor),
+//            calendarView.topAnchor.constraint(equalTo: separator.bottomAnchor),
+            calendarView.heightAnchor.constraint(equalToConstant: 332),
+            calendarView.widthAnchor.constraint(equalToConstant: 343)
+         ])
+    }
+
+//MARK: - Importance part
 
     func createImportanceRow() {
         let importanceLabel = UILabel()
@@ -174,21 +252,7 @@ final class TaskStackView {
         }
     }
 
-     @objc func openCalendar(sender: UIButton) {
-         let calendarView = UICalendarView()
-         let gregorianCalendar = Calendar(identifier: .gregorian)
-         calendarView.calendar = gregorianCalendar
-         calendarView.locale = Locale(identifier: "ru_RU")
-         calendarView.fontDesign = .default
-//         let separator = createSeparator()
-//         stack.addSubview(separator)
-         stack.addArrangedSubview(calendarView)
-         calendarView.translatesAutoresizingMaskIntoConstraints = false
-         NSLayoutConstraint.activate([
-            calendarView.topAnchor.constraint(equalTo: deadlineRow.bottomAnchor),
-//            calendarView.topAnchor.constraint(equalTo: separator.bottomAnchor),
-            calendarView.heightAnchor.constraint(equalToConstant: 332),
-            calendarView.widthAnchor.constraint(equalToConstant: 343)
-         ])
-    }
+
 }
+
+
