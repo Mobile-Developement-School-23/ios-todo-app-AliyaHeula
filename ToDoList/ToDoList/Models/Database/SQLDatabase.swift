@@ -12,7 +12,7 @@ enum DatabaseError: Error {
     case pathError
 }
 
-class SQLDatabase {
+final class SQLDatabase {
 
     let path: String
     let db: Connection
@@ -34,15 +34,13 @@ class SQLDatabase {
             }
             self.path = path
             self.db = try Connection("\(path)/db.todoList")
-
-            print("path is", path)
         } catch {
             print("Error: \(error)")
             throw error
         }
     }
 
-//MARK: - Change one by one
+    //MARK: - Change one by one
 
     func insertOne(item: TodoItem) throws -> Int {
         do {
@@ -63,11 +61,11 @@ class SQLDatabase {
         do {
             let itemToUpdate = todoList.filter(id == item.id)
             let updates = itemToUpdate.update(text <- item.text,
-                                               importance <- item.importance.rawValue,
-                                               deadline <- item.deadline,
-                                               isDone <- item.isDone,
-                                               createdOn <- item.createdOn,
-                                               changedOn <- item.changedOn)
+                                              importance <- item.importance.rawValue,
+                                              deadline <- item.deadline,
+                                              isDone <- item.isDone,
+                                              createdOn <- item.createdOn,
+                                              changedOn <- item.changedOn)
             try db.run(updates)
         } catch {
             throw error
@@ -83,7 +81,7 @@ class SQLDatabase {
         }
     }
 
-//MARK: - Replace all
+    //MARK: - Replace all
 
     func recreateDatabase() throws {
         do {
@@ -111,4 +109,16 @@ class SQLDatabase {
         }
     }
 
+    //MARK: - Print path
+
+    static func printPath() {
+        do {
+            guard let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first else {
+                throw DatabaseError.pathError
+            }
+            print("path is", path)
+        } catch {
+            print("Error: \(error)")
+        }
+    }
 }

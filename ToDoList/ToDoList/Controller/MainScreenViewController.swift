@@ -128,8 +128,8 @@ class MainScreenViewController: UIViewController {
 extension MainScreenViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        items.count + 1
-        items.count
+        items.count + 1
+//        items.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -229,7 +229,8 @@ extension MainScreenViewController: UITableViewDataSource, UITableViewDelegate {
                 self.items[indexPath.item].isDone = false
             }
             self.toDoTableView.reloadData()
-            self.tasks.updateCache(item: self.items[indexPath.item], action: .update)
+            self.updateTasks(updatedItem: self.items[indexPath.item])
+//            self.tasks.updateCache(item: self.items[indexPath.item], action: .update)
         })
         completeAction.backgroundColor = Colors.colorGreen
         completeAction.image = Images.complete
@@ -280,6 +281,7 @@ extension MainScreenViewController: TaskViewDelegate {
             while i < self.items.count {
                 if self.items[i].id == updatedItem.id {
                     self.items[i] = updatedItem
+                    self.items[i].changedOn = Date()
                     return
                 }
                 i += 1
