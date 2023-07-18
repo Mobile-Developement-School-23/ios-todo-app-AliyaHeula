@@ -20,7 +20,8 @@ final class TasksLaunching {
 
     init() {
         cache = FileCache()
-        if !cache.saveAllFromJSON(fileName: fileName, fileExtension: fileExtension) {
+//        if !cache.saveAllFromJSON(fileName: fileName, fileExtension: fileExtension) {
+        if !cache.load() {
             print("saving error")
         }
     }
@@ -34,7 +35,10 @@ final class TasksLaunching {
                 cache.addNewItem(newItem: item)
             }
         }
-        _ = cache.saveAllToJSON(fileName: fileName, fileExtension: fileExtension)
+//        _ = cache.saveAllToJSON(fileName: fileName, fileExtension: fileExtension)
+//        if cache.save() {
+//            print("Successfully saved to SQLite")
+//        }
     }
 
     func numberOfDoneTasks() -> Int {

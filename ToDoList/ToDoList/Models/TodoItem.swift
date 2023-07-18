@@ -79,6 +79,25 @@ extension TodoItem {
         }
         return dictionary
     }
+
+    var sqlReplaceStatement: String {
+        var deadline: String
+        if let check = self.deadline {
+            deadline = "\"\(check.dateTimeString)\""
+        } else {
+            deadline = "NULL"
+        }
+        var chanedOn: String
+        if let check = self.changedOn {
+            chanedOn = "\"\(check.dateTimeString)\""
+        } else {
+            chanedOn = "NULL"
+        }
+        let isDone: Int = self.isDone == false ? 0 : 1
+
+        let returnValue = "(\"\(self.id)\", \"\(self.text)\", \"\(self.importance.rawValue)\", \(deadline), \(isDone), \"\(self.createdOn.dateTimeString)\", \(chanedOn))"
+        return returnValue
+    }
 }
 
 

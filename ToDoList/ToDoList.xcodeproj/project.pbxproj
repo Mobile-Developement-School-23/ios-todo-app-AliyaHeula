@@ -25,6 +25,9 @@
 		4D8B08C62A4DF8D4009332D5 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8B08C52A4DF8D4009332D5 /* Colors.swift */; };
 		4D8B08C82A4FA61B009332D5 /* ToDoErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8B08C72A4FA61B009332D5 /* ToDoErrors.swift */; };
 		4D8B08CB2A4FBD6D009332D5 /* CocoaLumberjack in Frameworks */ = {isa = PBXBuildFile; productRef = 4D8B08CA2A4FBD6D009332D5 /* CocoaLumberjack */; };
+		4D9AA75D2A5E210C005AE348 /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 4D9AA75C2A5E210C005AE348 /* SQLite */; };
+		4D9AA7602A5EB070005AE348 /* SQLDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9AA75F2A5EB070005AE348 /* SQLDatabase.swift */; };
+		4D9AA7622A605487005AE348 /* Date+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9AA7612A605487005AE348 /* Date+extension.swift */; };
 		4DC7ECBC2A54B5D300BA096B /* URLSession+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC7ECBB2A54B5D300BA096B /* URLSession+extension.swift */; };
 		4DC7ECCB2A55AAA800BA096B /* DefaultNetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC7ECCA2A55AAA800BA096B /* DefaultNetworkingService.swift */; };
 		4DC7ECCD2A55C09C00BA096B /* NetworkTodoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC7ECCC2A55C09C00BA096B /* NetworkTodoItem.swift */; };
@@ -55,6 +58,8 @@
 		4D8B08C32A4D9165009332D5 /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		4D8B08C52A4DF8D4009332D5 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		4D8B08C72A4FA61B009332D5 /* ToDoErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoErrors.swift; sourceTree = "<group>"; };
+		4D9AA75F2A5EB070005AE348 /* SQLDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLDatabase.swift; sourceTree = "<group>"; };
+		4D9AA7612A605487005AE348 /* Date+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+extension.swift"; sourceTree = "<group>"; };
 		4DC7ECBB2A54B5D300BA096B /* URLSession+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+extension.swift"; sourceTree = "<group>"; };
 		4DC7ECCA2A55AAA800BA096B /* DefaultNetworkingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultNetworkingService.swift; sourceTree = "<group>"; };
 		4DC7ECCC2A55C09C00BA096B /* NetworkTodoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTodoItem.swift; sourceTree = "<group>"; };
@@ -74,6 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D9AA75D2A5E210C005AE348 /* SQLite in Frameworks */,
 				4D68DF022A4FD635008425FF /* spm in Frameworks */,
 				4D8B08CB2A4FBD6D009332D5 /* CocoaLumberjack in Frameworks */,
 			);
@@ -102,6 +108,8 @@
 		4D86FE912A46A4ED00BCA7AC /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				4D86FE962A4A41D000BCA7AC /* MainScreenViewController.swift */,
+				4D68F12B2A43385C003BEEC1 /* TaskViewController.swift */,
 				4D86FE922A46A58F00BCA7AC /* TasksLaunching.swift */,
 			);
 			path = Controller;
@@ -110,7 +118,6 @@
 		4D86FE9A2A4A442800BCA7AC /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				4D86FE962A4A41D000BCA7AC /* MainScreenViewController.swift */,
 				4D86FE982A4A441800BCA7AC /* ToDoTableView.swift */,
 				4D86FE9C2A4B191200BCA7AC /* TableViewCell.swift */,
 				4D8B08C02A4B6294009332D5 /* HiddenTasksView.swift */,
@@ -121,7 +128,6 @@
 		4D86FE9B2A4A443A00BCA7AC /* Task */ = {
 			isa = PBXGroup;
 			children = (
-				4D68F12B2A43385C003BEEC1 /* TaskViewController.swift */,
 				4D300DE22A45AB87003814D4 /* TaskStackView.swift */,
 				4D300DE02A45A51C003814D4 /* TaskTextView.swift */,
 				4D86FE8D2A46738500BCA7AC /* DeleteButton.swift */,
@@ -138,6 +144,23 @@
 				4D8B08C72A4FA61B009332D5 /* ToDoErrors.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		4D9AA75E2A5EAFC2005AE348 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				4D9AA75F2A5EB070005AE348 /* SQLDatabase.swift */,
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
+		4D9AA7632A605802005AE348 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				4DC7ECBB2A54B5D300BA096B /* URLSession+extension.swift */,
+				4D9AA7612A605487005AE348 /* Date+extension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		4DC7ECC92A55AA8100BA096B /* Network */ = {
@@ -187,12 +210,13 @@
 		4DD4D7562A35EF0E001315A8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				4D9AA7632A605802005AE348 /* Extension */,
+				4D9AA75E2A5EAFC2005AE348 /* Database */,
 				4D3EB9C62A4FDA8200B2D693 /* FileCache.swift */,
 				4D3EB9C72A4FDA8200B2D693 /* TodoItem.swift */,
 				4D86FE8F2A46A47B00BCA7AC /* testFile.json */,
 				4DC7ECC92A55AA8100BA096B /* Network */,
 				4D8B08C22A4D9138009332D5 /* Utils */,
-				4DC7ECBB2A54B5D300BA096B /* URLSession+extension.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -216,6 +240,7 @@
 			packageProductDependencies = (
 				4D8B08CA2A4FBD6D009332D5 /* CocoaLumberjack */,
 				4D68DF012A4FD635008425FF /* spm */,
+				4D9AA75C2A5E210C005AE348 /* SQLite */,
 			);
 			productName = ToDoList;
 			productReference = 4DD4D73F2A35EECE001315A8 /* ToDoList.app */;
@@ -247,6 +272,7 @@
 			mainGroup = 4DD4D7362A35EECE001315A8;
 			packageReferences = (
 				4D8B08C92A4FBD6D009332D5 /* XCRemoteSwiftPackageReference "CocoaLumberjack" */,
+				4D9AA75B2A5E210C005AE348 /* XCRemoteSwiftPackageReference "SQLite" */,
 			);
 			productRefGroup = 4DD4D7402A35EECE001315A8 /* Products */;
 			projectDirPath = "";
@@ -276,6 +302,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D3EB9C92A4FDA8200B2D693 /* TodoItem.swift in Sources */,
+				4D9AA7602A5EB070005AE348 /* SQLDatabase.swift in Sources */,
 				4DC7ECCB2A55AAA800BA096B /* DefaultNetworkingService.swift in Sources */,
 				4D86FE932A46A58F00BCA7AC /* TasksLaunching.swift in Sources */,
 				4D8B08C62A4DF8D4009332D5 /* Colors.swift in Sources */,
@@ -298,6 +325,7 @@
 				4DD4D7432A35EECE001315A8 /* AppDelegate.swift in Sources */,
 				4D8B08C12A4B6294009332D5 /* HiddenTasksView.swift in Sources */,
 				4DD4D7452A35EECE001315A8 /* SceneDelegate.swift in Sources */,
+				4D9AA7622A605487005AE348 /* Date+extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -518,6 +546,14 @@
 				minimumVersion = 3.0.0;
 			};
 		};
+		4D9AA75B2A5E210C005AE348 /* XCRemoteSwiftPackageReference "SQLite" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/stephencelis/SQLite.swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.14.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -529,6 +565,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4D8B08C92A4FBD6D009332D5 /* XCRemoteSwiftPackageReference "CocoaLumberjack" */;
 			productName = CocoaLumberjack;
+		};
+		4D9AA75C2A5E210C005AE348 /* SQLite */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4D9AA75B2A5E210C005AE348 /* XCRemoteSwiftPackageReference "SQLite" */;
+			productName = SQLite;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
