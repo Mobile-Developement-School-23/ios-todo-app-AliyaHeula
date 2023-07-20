@@ -20,6 +20,7 @@ enum Images {
     static let lowPriority = UIImage(named: "low")
 
     static let plus = UIImage(named: "Plus")
+    static let plusFill = UIImage(named: "plus.fill")
 
     static let delete = UIImage(named: "delete")
     static let complete = UIImage(named: "complete")

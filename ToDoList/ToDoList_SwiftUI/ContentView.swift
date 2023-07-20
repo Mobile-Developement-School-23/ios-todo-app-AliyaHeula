@@ -32,11 +32,14 @@ struct cellView: View {
     var body: some View {
         HStack {
             Image(uiImage: Images.choosePropImage(item: task))
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 0) {
                 Text(task.text).lineLimit(3)
                 if let deadline = task.deadline {
-                    Text(deadline.dateStringShortRU)
-                        .foregroundColor(Colors.captureColor(color: Colors.labelTertiary))
+                    HStack (spacing: 2) {
+                        Images.getImage(image: Images.calendar)
+                        Text(deadline.dateStringShortRU)
+                            .foregroundColor(Colors.captureColor(color: Colors.labelTertiary))
+                    }
                 }
             }
         }
@@ -78,11 +81,13 @@ struct ContentView: View {
                     Button {
                         print("plus tapped")
                     } label: {
-                        Images.getImage(image: Images.plus)
-                            .resizable()
-                            .frame(width: 44, height: 44)
+                        ZStack {
+                            Images.getImage(image: Images.plusFill)
+                            Images.getImage(image: Images.plus)
+                                .resizable()
+                                .frame(width: 44, height: 44)
+                        }
                     }
-//                    .background()
                 }
             }
             .scrollContentBackground(.hidden)
