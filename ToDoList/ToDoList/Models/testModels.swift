@@ -9,8 +9,8 @@ func mainmain() {
     
 // Testing saving to JSON
     let test = FileCache()
-    test.addNewItem(id: "hardcode_id", text: "text", importance: .low, deadline: nil, isDone: false)
-    test.addNewItem(id: nil, text: "newone", importance: .high, deadline: Date(), isDone: false)
+//    test.addNewItem(id: "hardcode_id", text: "text", importance: .low, deadline: nil, isDone: false)
+//    test.addNewItem(id: nil, text: "newone", importance: .high, deadline: Date(), isDone: false)
     _ = test.saveAllToJSON(fileName: fileName, fileExtension: fileExtension)
     print("Printing JSON:")
     do {

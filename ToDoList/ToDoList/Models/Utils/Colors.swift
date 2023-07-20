@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 enum Colors {
     static let backPrimary = UIColor(named: "BackPrimary")
@@ -22,5 +23,19 @@ enum Colors {
     
     static let supportSeparator = UIColor(named: "SupportSeparator")
 
+    static func captureUIColor(color: UIColor?) -> UIColor {
+        if let colorToReturn = color {
+            return colorToReturn
+        } else {
+            return .black
+        }
+    }
 
+    static func captureColor(color: UIColor?) -> Color {
+        if let colorToReturn = color {
+            return Color(colorToReturn)
+        } else {
+            return Color.black
+        }
+    }
 }

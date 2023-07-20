@@ -16,6 +16,14 @@ private let dateFormatter: DateFormatter = {
     return formatter
 }()
 
+private let dateFormatterShortRU: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.locale = Locale(identifier: "ru_RU")
+    formatter.dateFormat = "d MMMM yyyy"
+    return formatter
+}()
+
 extension Date {
     var dateTimeString: String { dateFormatter.string(from: self) }
+    var dateStringShortRU: String { dateFormatterShortRU.string(from: self) }
 }

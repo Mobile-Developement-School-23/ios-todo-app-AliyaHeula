@@ -129,7 +129,6 @@ extension MainScreenViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         items.count + 1
-//        items.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -143,7 +142,7 @@ extension MainScreenViewController: UITableViewDataSource, UITableViewDelegate {
 
             cell.accessoryType = .disclosureIndicator
 
-            let propImage = choosePropImage(item: currentTask)
+            let propImage = Images.choosePropImage(item: currentTask)
             cell.propButton.setImage(propImage, for: .normal)
             cell.propButton.addTarget(self, action: #selector(pushPropButton), for: .touchDown)
 //            cell.propButton.addTarget(self, action: pushPropButton(index: indexPath.row), for: .touchDown)
@@ -195,25 +194,6 @@ extension MainScreenViewController: UITableViewDataSource, UITableViewDelegate {
         return dateString
     }
 
-    private func choosePropImage(item: TodoItem) -> UIImage {
-        var result: UIImage?
-        if item.isDone {
-            result = Images.propOn
-        }
-        else {
-            if item.importance == .high {
-                result = Images.propHightPriority
-            } else {
-                result = Images.propOff
-            }
-        }
-
-        if let image = result {
-            return image
-        } else {
-            return UIImage()
-        }
-    }
 
 
 //MARK: - Row Actions
